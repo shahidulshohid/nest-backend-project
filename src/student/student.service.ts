@@ -4,7 +4,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 export class StudentService {
     private Students = [
         { id: 1, name: 'John Doe', age: 20, },
-        { id: 2, name: 'Jane Doe', age: 21, },
+        { id: 2, name: 'babu', age: 21, },
+        { id: 3, name: 'islma', age: 25, },
+        { id: 4, name: 'baki', age: 26, },
     ]
 
     getAllStudents() {

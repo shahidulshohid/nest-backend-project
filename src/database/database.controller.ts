@@ -1,20 +1,13 @@
-import { Controller, OnModuleInit, OnApplicationShutdown } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { DatabaseService } from './database.service';
 
 @Controller('database')
-export class DatabaseController implements OnModuleInit, OnApplicationShutdown {
-    private isConnected = false;
-
-    onModuleInit() {
-        this.isConnected = true;
-        console.log("Database Connected");
-    }
-
-    onApplicationShutdown(signal: string) {
-        this.isConnected = false;
-        console.log(`Database Disconnected due to app shutdown, signal ${signal}`);
-    }
-
+export class DatabaseController {
+    constructor(private readonly databaseService : DatabaseService) {}
+    @Get('status')
     getStatus() {
-        return this.isConnected ? "Connected" : "Disconnected";
+        return {
+            status: this.databaseService.getStatus(),
+        }
     }
 }

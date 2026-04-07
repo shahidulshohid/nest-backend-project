@@ -1,7 +1,8 @@
-import { Controller, Get, HttpException, Param, ParseIntPipe, UseFilters } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, UseFilters } from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/filters/http-exception/http-exception.filter';
 
 @Controller('exception')
-@UseFilters(HttpException)
+@UseFilters(HttpExceptionFilter)
 export class ExceptionController {
     @Get('hello/:id')
     getHello(@Param('id', ParseIntPipe) id: number){ 

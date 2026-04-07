@@ -25,7 +25,9 @@ import { MongooseModule } from '@nestjs/mongoose';
     CategoryModule,
     StudentModule,
     CustomerModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRoot(process.env.MONGO_URL!),
   ],
   // imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({

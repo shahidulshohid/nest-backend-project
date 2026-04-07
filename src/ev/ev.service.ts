@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {ConfigureService} from '@nestjs/config'
+import {ConfigService} from '@nestjs/config'
 
 @Injectable()
 export class EvService {
-    constructor(private configureService: ConfigureService){}
+    constructor(private configureService: ConfigService){}
 
     getDbUrl() {
         return this.configureService.get<string>('DATABASE_URL')

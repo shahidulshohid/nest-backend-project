@@ -65,11 +65,24 @@ export class StudentService {
         @InjectModel(Student.name) private readonly studentModel: Model<studentDocument>
     ){}
 
+    // post student 
     async createStudent(data: Partial<Student>) : 
     Promise<Student> {
         const newStudent = new this.studentModel(data);
         return newStudent.save(); 
     }
+
+    //get all student
+    async getAllStudents(): Promise<Student[]>{
+        return this.studentModel.find().exec();
+    }
+
+    // get single student 
+    async getStudentById(id: string): Promise<Student | null>{
+        return this.studentModel.findById(id).exec();
+    }
+
+
 }
 
 

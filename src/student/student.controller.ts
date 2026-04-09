@@ -39,7 +39,7 @@
 
 
 
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { StudentService } from "./student.service";
 import { Student } from "./student.schema";
 
@@ -56,5 +56,14 @@ export class StudentController {
         return this.studentService.getAllStudents();
     }
 
+    @Get(':id')
+    async getStudent(@Param('id') id: string){
+        return this.studentService.getStudentById(id)
+    }
+    
+    @Put(':id')
+    async updateStudent(@Param('id') id: string, @Body() data: Partial<Student>){
+        return this.studentService.updateStudent(id, data)
+    }
 
 }

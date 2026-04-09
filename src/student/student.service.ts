@@ -84,6 +84,17 @@ export class StudentService {
 
     // update student 
     async updateStudent(id: string, data: Partial<Student>): Promise<Student | null>{
+        // return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();
+        const updated = await this.studentModel.findByIdAndUpdate(id, {
+            name: data.name ?? null,
+            age: data.age ?? null,
+            email: data.email ?? null,
+        }, {overwrite: true, new: true}).exec();
+        return updated;
+    } 
+
+    // patch student 
+    async patchStudent(id: string, data: Partial<Student>): Promise<Student | null> {
         return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();
     }
 

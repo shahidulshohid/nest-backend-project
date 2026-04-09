@@ -35,7 +35,10 @@ import { UserModule } from './user/user.module';
   // imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({
   //   isGlobal: true,
   // })],
-  controllers: [AppController, UserController, ProductController, MynameController, UserRolesController, ExceptionController, DatabaseController, EvController],
+  controllers: [
+    AppController,
+    //  UserController,
+    ProductController, MynameController, UserRolesController, ExceptionController, DatabaseController, EvController],
   providers: [AppService, ProductService, DatabaseService, EvService],
 })
 export class AppModule implements NestModule {

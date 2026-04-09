@@ -97,7 +97,11 @@ export class StudentService {
     async patchStudent(id: string, data: Partial<Student>): Promise<Student | null> {
         return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();
     }
-
+    
+    // delete student
+    async deleteStudent(id: string): Promise<Student | null> {
+        return this.studentModel.findByIdAndDelete(id).exec();
+    }
 
 }
 

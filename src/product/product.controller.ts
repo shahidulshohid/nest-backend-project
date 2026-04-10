@@ -1,19 +1,17 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Controller('product')
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
+    @Post()
+    createProduct() {
+        return this.productService.createProduct();
+    }
 
     @Get()
-    @UseGuards(AuthGuard)
-    getAllProducts() {
+    getAll() {
         return this.productService.getAllProducts();
     }
 
-    @Get(`:id`)
-    getProductById(@Param('id') id: string) {
-        return this.productService.getProductById(Number(id))
-    }
 }

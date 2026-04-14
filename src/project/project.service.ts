@@ -46,4 +46,4 @@ export class ProjectService {
     async getProjects(): Promise<Project[]>{
         return this.projectModel.find().populate('developers').lean();
     }
-}    
+}       

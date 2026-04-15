@@ -22,6 +22,7 @@ import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { LibraryModule } from './library/library.module';
 import { ProjectModule } from './project/project.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ProjectModule } from './project/project.module';
     ProductModule,
     LibraryModule,
     ProjectModule,
+    AuthModule,
   ],
   // imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({
   //   isGlobal: true,

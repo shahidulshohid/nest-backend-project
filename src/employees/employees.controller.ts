@@ -45,3 +45,8 @@ export class EmployeesController {
     }
 
 }
+
+
+// supabase a login
+
+// https://clqhzfijhjhmcrhkzzks.supabase.co/auth/v1/token?grant_type=password

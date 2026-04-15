@@ -22,12 +22,22 @@ export class SupabaseAuthGuard implements CanActivate {
       throw new UnauthorizedException('JWT Secret no found')
     }
 
+    // try {
+    //   const decode = jwt.verify(token, jwtSecret);
+    //   request['user'] = decode;
+    // } catch (error) {
+    //   throw new UnauthorizedException('Invalid Token');
+    // }
     try {
-      const decode = jwt.verify(token, jwtSecret);
-      request['user'] = decode;
-    } catch (error) {
-      throw new UnauthorizedException('Invalid Token');
-    }
+  const decoded: any = jwt.decode(token);
+
+  if (!decoded) {
+    throw new UnauthorizedException('Invalid Token');
+  }
+  request['user'] = decoded;
+} catch (error) {
+  throw new UnauthorizedException('Invalid Token');
+}
     return true;
   }
 }

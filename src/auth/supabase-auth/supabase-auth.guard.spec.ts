@@ -1,7 +1,12 @@
 import { SupabaseAuthGuard } from './supabase-auth.guard';
+import { ConfigService } from '@nestjs/config';
 
 describe('SupabaseAuthGuard', () => {
   it('should be defined', () => {
-    expect(new SupabaseAuthGuard()).toBeDefined();
+    const mockConfigService = {
+      get: jest.fn(),
+    } as unknown as ConfigService;
+
+    expect(new SupabaseAuthGuard(mockConfigService)).toBeDefined();
   });
 });

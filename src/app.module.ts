@@ -5,6 +5,8 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmployeesModule } from './employees/employees.module';
+import { AuthModule } from './auth/auth.module';
+
 
 @Module({
   imports: [
@@ -18,7 +20,8 @@ import { EmployeesModule } from './employees/employees.module';
       synchronize: true,
     }),
     UserModule,
-    EmployeesModule
+    EmployeesModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

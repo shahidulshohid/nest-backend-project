@@ -1,61 +1,26 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserController } from './user/user.controller';
-import { ProductService } from './product/product.service';
-import { ProductController } from './product/product.controller';
-import { EmployeeModule } from './employee/employee.module';
-import { CategoryModule } from './category/category.module';
-import { StudentModule } from './student/student.module';
-import { CustomerModule } from './customer/customer.module';
-import { MynameController } from './myname/myname.controller';
-import { UserRolesController } from './user-roles/user-roles.controller';
-import { ExceptionController } from './exception/exception.controller';
-import { LoggerMiddleware } from './middleware/logger/logger.middleware';
-import { DatabaseService } from './database/database.service';
-import { DatabaseController } from './database/database.controller';
-import { ConfigModule } from '@nestjs/config';
-import { EvService } from './ev/ev.service';
-import { EvController } from './ev/ev.controller';
-import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
-import { ProductModule } from './product/product.module';
-import { LibraryModule } from './library/library.module';
-import { ProjectModule } from './project/project.module';
-import { AuthModule } from './auth/auth.module';
-import { User2Module } from './user2/user2.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
-    EmployeeModule,
-    CategoryModule,
-    StudentModule,
-    CustomerModule,
     ConfigModule.forRoot({
-      isGlobal: true,
+      isGlobal: true
     }),
-    MongooseModule.forRoot(process.env.MONGO_URL!),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
     UserModule,
-    ProductModule,
-    LibraryModule,
-    ProjectModule,
-    AuthModule,
-    User2Module,
+    EmployeesModule
   ],
-  // imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({
-  //   isGlobal: true,
-  // })],
-  controllers: [
-    AppController,
-    //  UserController,
-    // ProductController,
-    MynameController, UserRolesController, ExceptionController, DatabaseController, EvController],
-  providers: [AppService,
-    //  ProductService, 
-    DatabaseService, EvService], 
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
